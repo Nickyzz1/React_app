@@ -21,9 +21,15 @@ const PageAxios = () => {
                     setData(res.data.items)
                 })
                 .catch((error) => {
-                    console.log(error);
-                    if (error.response && error.response.status === 404) {
-                        setMsg("Página não encontrada");
+                    console.log(error); // Para depuração
+                    if (error.response) {
+                        if (error.response.status === 404) {
+                            setMsg("Página não encontrada");
+                        } else {
+                            setMsg("Erro ao buscar dados");
+                        }
+                    } else {
+                        setMsg("Erro na requisição");
                     }
                     setErro(true)
                 });
