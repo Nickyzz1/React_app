@@ -37,9 +37,9 @@ const FetchServerSide = async () => {
                 {data.items.map((item) => (
                     <div key={item.id} className={style.box}>
                         <h2 className="m-2">{item.name}</h2>
-                        {/* <Link href={`/perso/${item.id}`} className={style.btn}>
+                        <Link href={`/person/${item.id}`} className={style.btn}>
                             ABRIR
-                        </Link> */}
+                        </Link>
                     </div>
                 ))}
             </div>
