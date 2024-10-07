@@ -17,7 +17,7 @@ const pageAxios = () =>
     const [data, setData] = useState<IData[]>([])
     const [erro, setErro] = useState<boolean>(false)
     const [msg, setMsg] = useState<string>("Não foi possível buscar dados")
-    const [page, setPage] = useState<string>("")
+    const [page, setPage] = useState<string>("6")
 
 
     useEffect(() => {
