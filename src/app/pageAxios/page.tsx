@@ -47,7 +47,7 @@ const pageAxios = () =>
         <h1>Pagina com use effect e axios</h1>
 
         {erro && <h5>{msg}</h5> }
-        <input type="text" value={page} onChange={(e)=> setPage(e.target.value)} placeholder="1/42"/>
+        <input type="text" value={page} onChange={(e)=> setPage(e.target.value)} placeholder="1/6"/>
 
         <div className="flex flex-wrap gap-3 justify-center items-center">
             {data.map((item, index) => {
