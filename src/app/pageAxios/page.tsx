@@ -16,7 +16,7 @@ const PageAxios = () => {
     useEffect(() => {
         const pageNumber = parseInt(page);
         console.log("Buscando dados para a página:", page); // Para depuração
-        if (!isNaN(pageNumber) && pageNumber > 0) {
+        if (!isNaN(pageNumber) && pageNumber > 0 && pageNumber < 7) {
             api.get(`/characters?page=${page}&limit=10`)
                 .then((res) => {
                     setErro(false)
