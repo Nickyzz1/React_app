@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Menu op1="fetch" op2="axios"/>
+        <Menu op1="fetch" op2="axios" op3="server side"/>
         {children}
       </body>
     </html>

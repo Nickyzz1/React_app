@@ -23,6 +23,11 @@ const nextConfig = {
                 destination: "/pageFetch",
 
             },
+            {
+                source: "/server_side", // em portugueds
+                destination: "/serverSide",
+
+            },
         ]
     }
 };
