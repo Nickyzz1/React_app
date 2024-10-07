@@ -14,15 +14,18 @@ const PageAxios = () => {
     const [page, setPage] = useState<string>("1")
 
     useEffect(() => {
-        if (page) { // Verifica se o valor de page não está vazio
+        const pageNumber = parseInt(page);
+        console.log("Buscando dados para a página:", page); // Para depuração
+        if (!isNaN(pageNumber) && pageNumber > 0) {
             api.get(`/characters?page=${page}&limit=10`)
                 .then((res) => {
                     setErro(false)
                     setData(res.data.items)
                 })
                 .catch((error) => {
-                    console.log(error); // Para depuração
+                    console.log("Erro:", error); // Para depuração
                     if (error.response) {
+                        console.log("Resposta do servidor:", error.response); // Inspecionar a resposta
                         if (error.response.status === 404) {
                             setMsg("Página não encontrada");
                         } else {
@@ -31,10 +34,13 @@ const PageAxios = () => {
                     } else {
                         setMsg("Erro na requisição");
                     }
-                    setErro(true)
+                    setErro(true);
                 });
+        } else {
+            setMsg("Digite um número de página válido.");
+            setErro(true);
         }
-    }, [page]) // A requisição é feita sempre que o valor de page mudar
+    }, [page]);
 
     return (
         <>
@@ -65,6 +71,5 @@ const PageAxios = () => {
         </>
     )
 }
-// dhgewvudyfgweyrf hwdfygeuwg
 
 export default PageAxios;

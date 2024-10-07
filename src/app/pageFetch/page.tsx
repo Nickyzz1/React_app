@@ -11,6 +11,12 @@ interface IData {
 const FetchPage = () => {
     const [character, setcharacter] = useState<IData[]>([]);
 
+    const style =
+    {
+        container: "flex flex-row flex-wrap",
+        box: "flex flex-col"
+    }
+
     useEffect(() => {
         const load = async () => {
             try {
@@ -34,6 +40,8 @@ const FetchPage = () => {
     return (
         <div className="h-screen">
             <h1>Fetch nativo para requisições get</h1>
+        <div className={style.container}>
+     
             {character.map((item: IData, index) => (
                 <div key={index}>
                     <h2>{item.name}</h2>
@@ -48,6 +56,7 @@ const FetchPage = () => {
                     />
                 </div>
             ))}
+        </div>
         </div>
     );
 };
