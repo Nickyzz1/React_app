@@ -17,13 +17,13 @@ const pageAxios = () =>
     const [data, setData] = useState<IData[]>([])
     const [erro, setErro] = useState<boolean>(false)
     const [msg, setMsg] = useState<string>("Não foi possível buscar dados")
-    const [page, setPage] = useState<string>("1")
+    const [page, setPage] = useState<string>("")
 
 
     useEffect(() => {
 
     return () => {
-        api.get(`/characters?page=${page}`).then((res)=>{
+        api.get(`/characters?page=${page}&limit=10`).then((res)=>{
             setErro(false)
             console.log(res.data.items)
             setData(res.data.items)
