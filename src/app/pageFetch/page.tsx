@@ -13,8 +13,8 @@ const FetchPage = () => {
 
     const style =
     {
-        container: "flex flex-row flex-wrap",
-        box: "flex flex-col"
+        container: "flex flex-row flex-wrap gap-6 m-4 justify-center",
+        box: "flex flex-col items-center justify-center w-80 p-6 bg-cyan-700 rounded-xl text-white"
     }
 
     useEffect(() => {
@@ -43,11 +43,11 @@ const FetchPage = () => {
         <div className={style.container}>
      
             {character.map((item: IData, index) => (
-                <div key={index}>
+                <div className={style.box} key={index}>
                     <h2>{item.name}</h2>
                     <p>{item.ki}</p>
                     <img
-                        className="h-auto w-[200px] object-cover rounded-lg"
+                        className="h-60 w-auto object-cover rounded-lg"
                         src={item.image}
                         alt={item.name} // Usar um alt apropriado
                         width={200}
