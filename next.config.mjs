@@ -2,7 +2,7 @@
 const nextConfig = {
 
     images: {
-        domains: ['dragonball-api.com'], // Adicione o domínio da sua API aqui
+        domains: ['https://dragonball-api.com/api/characters/'], // Adicione o domínio da sua API aqui
     },
 
     rewrites: () => 
