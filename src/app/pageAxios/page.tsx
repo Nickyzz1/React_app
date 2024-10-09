@@ -15,26 +15,31 @@ const PageAxios = () => {
     const [personName, setName] = useState<string>("")
 
     useEffect(() => {
-        // Verifica se pelo menos um dos parâmetros é fornecido
+      
         if ((parseInt(page) < 7 && page != "" )|| personName) {
-            console.log("Buscando dados..."); // Para depuração
+            console.log("Buscando dados..."); 
             const url = `/characters?${personName ? `&name=${encodeURIComponent(personName)}` : ''}${page ? `&page=${encodeURIComponent(page)}` : ''}`;
-            console.log("URL da requisição:", url); // Para depuração
+            console.log("URL da requisição:", url); 
 
             api.get(url)
                 .then((res) => {
                     setErro(false);
-                    console.log(res.data); // Inspecione a resposta da API
-                    const items = res.data.items || [];
-                    setData(items)
-                    if (items.length === 0) {
-                        setMsg("Nenhum personagem encontrado.");
-                    } else {
-                        setMsg(""); // Limpa a mensagem se houver resultados
+                    console.log(res.data); 
+                    let items = null;
+
+                    if(personName)
+                    {
+                        items = res.data || [];
                     }
+                    else{
+
+                        items = res.data.items || [];
+                    }
+
+                    setData(items)
                 })
                 .catch((error) => {
-                    console.log("Erro:", error); // Para depuração
+                    console.log("Erro:", error); 
                     if (error.response) {
                         console.log("Resposta do servidor:", error.response);
                         setMsg(error.response.status === 404 ? "Página não encontrada" : "Erro ao buscar dados");
@@ -47,7 +52,7 @@ const PageAxios = () => {
             setMsg("Digite um numero ou uma página válida.");
             setErro(true);
         }
-    }, [page, personName]);
+    }, [personName, page]);
 
     return (
         <>
