@@ -16,7 +16,7 @@ const PageAxios = () => {
 
     useEffect(() => {
         // Verifica se pelo menos um dos parâmetros é fornecido
-        if (page || personName) {
+        if ((parseInt(page) < 7 && page != "" )|| personName) {
             console.log("Buscando dados..."); // Para depuração
             const url = `/characters?${personName ? `&name=${encodeURIComponent(personName)}` : ''}${page ? `&page=${encodeURIComponent(page)}` : ''}`;
             console.log("URL da requisição:", url); // Para depuração
@@ -44,7 +44,7 @@ const PageAxios = () => {
                     setErro(true);
                 });
         } else {
-            setMsg("Por favor, insira um número de página ou um nome para buscar.");
+            setMsg("Digite um numero ou uma página válida.");
             setErro(true);
         }
     }, [page, personName]);
@@ -58,7 +58,7 @@ const PageAxios = () => {
                     type="text" 
                     value={page} 
                     onChange={(e) => setPage(e.target.value)} 
-                    placeholder="Digite a página" 
+                    placeholder="1/6" 
                 />
                 <input 
                     type="text" 
