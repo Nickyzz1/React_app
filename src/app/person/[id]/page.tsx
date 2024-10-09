@@ -26,14 +26,14 @@ const Perso = async({params: {id}} : IPerso) =>
 
     const style =
     {
-        container: "flex flex-wrap justify-center",
+        container: "flex flex-wrap justify-center items-center",
         box: "flex flex-col flex-wrap bg-cyan-700 text-white object-cover overflow-hiden rounded p-8 m-4 shadow-[0_10px_33px_1px_rgba(255,255,255,0.1)]",
-        img: "h-auto mt-6 w-[460px] rounded object-cover"
+        img: "h-[300px] w-auto mt-6 w-[460px] rounded object-cover"
     }
     //o seo coloca a página que ele lê primeiro no google, se o cliente quer aparecer primeiro tem qwue ter otimização
 
     return(
-        <div className="h-screen">
+        <div className="min-h-screen overflow y-auto">
             <div className={style.container}>
                 <div className={style.box}>
                     <div className="flex self-center gap-6">
@@ -41,7 +41,7 @@ const Perso = async({params: {id}} : IPerso) =>
                         <p>Name: {data.name}</p>
                     </div>
 
-                    <img className={style.img} src={data.image} alt="Photo" width={200} height={200}></img>
+                    <Image className={style.img} src={data.image} alt="Photo" width={200} height={100} priority></Image>
 
                 </div>
             </div>

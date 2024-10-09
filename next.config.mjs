@@ -1,9 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
 
-    images: {
-        domains: ['https://dragonball-api.com/api/characters/'], // Adicione o domínio da sua API aqui
+    images:
+    {
+        remotePatterns: [
+            {protocol: "https", 
+            hostname: "dragonball-api.com"}]
     },
+
+
+    // images: {
+    //     domains: ['https://dragonball-api.com/api/characters/'], // Adicione o domínio da sua API aqui
+    // },
 
     rewrites: () => 
     { // / retona um arr de obj

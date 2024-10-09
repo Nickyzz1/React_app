@@ -11,36 +11,43 @@ const PageAxios = () => {
     const [data, setData] = useState<IData[]>([])
     const [erro, setErro] = useState<boolean>(false)
     const [msg, setMsg] = useState<string>("Não foi possível buscar dados")
-    const [page, setPage] = useState<string>("1")
+    const [page, setPage] = useState<string>("")
+    const [personName, setName] = useState<string>("")
 
     useEffect(() => {
-        const pageNumber = parseInt(page);
-        console.log("Buscando dados para a página:", page); // Para depuração
-        if (!isNaN(pageNumber) && pageNumber > 0 && pageNumber < 7) {
-            api.get(`/characters?page=${page}&limit=10`)
+        // Verifica se pelo menos um dos parâmetros é fornecido
+        if (page || personName) {
+            console.log("Buscando dados..."); // Para depuração
+            const url = `/characters?${personName ? `&name=${encodeURIComponent(personName)}` : ''}${page ? `&page=${encodeURIComponent(page)}` : ''}`;
+            console.log("URL da requisição:", url); // Para depuração
+
+            api.get(url)
                 .then((res) => {
-                    setErro(false)
-                    setData(res.data.items)
+                    setErro(false);
+                    console.log(res.data); // Inspecione a resposta da API
+                    const items = res.data.items || [];
+                    if (items.length === 0) {
+                        setMsg("Nenhum personagem encontrado.");
+                    } else {
+                        setMsg(""); // Limpa a mensagem se houver resultados
+                    }
+                    setData(items);
                 })
                 .catch((error) => {
                     console.log("Erro:", error); // Para depuração
                     if (error.response) {
-                        console.log("Resposta do servidor:", error.response); // Inspecionar a resposta
-                        if (error.response.status === 404) {
-                            setMsg("Página não encontrada");
-                        } else {
-                            setMsg("Erro ao buscar dados");
-                        }
+                        console.log("Resposta do servidor:", error.response);
+                        setMsg(error.response.status === 404 ? "Página não encontrada" : "Erro ao buscar dados");
                     } else {
                         setMsg("Erro na requisição");
                     }
                     setErro(true);
                 });
         } else {
-            setMsg("Digite um número de página válido.");
+            setMsg("Por favor, insira um número de página ou um nome para buscar.");
             setErro(true);
         }
-    }, [page]);
+    }, [page, personName]);
 
     return (
         <>
@@ -51,8 +58,15 @@ const PageAxios = () => {
                     type="text" 
                     value={page} 
                     onChange={(e) => setPage(e.target.value)} 
-                    placeholder="1/6" 
+                    placeholder="Digite a página" 
                 />
+                <input 
+                    type="text" 
+                    value={personName} 
+                    onChange={(e) => setName(e.target.value)} 
+                    placeholder="Pesquise por nome" 
+                />
+
                 <div className="flex flex-wrap gap-3 justify-center items-center">
                     {data.map((item, index) => (
                         <div className="rounded-lg hover:" key={index}>
@@ -60,7 +74,7 @@ const PageAxios = () => {
                             <img 
                                 className="h-60 w-auto object-cover rounded-lg" 
                                 src={item.image} 
-                                alt="" 
+                                alt={item.name} 
                                 width={300} 
                                 height={300} 
                             />

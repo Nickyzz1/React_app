@@ -38,7 +38,7 @@ const FetchPage = () => {
     }, []);
 
     return (
-        <div className="h-screen">
+        <div className="min-h-screen overflow y-auto">
             <h1>Fetch nativo para requisições get</h1>
         <div className={style.container}>
      

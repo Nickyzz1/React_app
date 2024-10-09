@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-
+// é como se fosse uma struct ou uma classe
 type IData = {
     items: {
         name: string;
@@ -31,7 +31,7 @@ const FetchServerSide = async () => {
     };
 
     return (
-        <div className="h-screen text-center">
+        <div className="min-h-screen overflow y-auto text-center">
             <h1 className="m-4">Server Side Rendering</h1>
             <div className={style.container}>
                 {data.items.map((item) => (
